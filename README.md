@@ -1,5 +1,7 @@
 # InterviewIQ.AI
 
+🚀 **Live Demo:** [https://ai-based-interview-f2sb-iota.vercel.app/](https://ai-based-interview-f2sb-iota.vercel.app/)
+
 An AI-powered mock interview platform built with React, Node.js, MongoDB, and Firebase.
 
 ## Features
