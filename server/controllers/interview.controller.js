@@ -56,8 +56,8 @@ Return strictly JSON:
 
 
     const aiResponse = await askAi(messages)
-
-    const parsed = JSON.parse(aiResponse);
+    const cleanedJson = aiResponse.replace(/```json|```/g, "").trim();
+    const parsed = JSON.parse(cleanedJson);
 
     fs.unlinkSync(filepath)
 
@@ -313,9 +313,8 @@ Answer: ${answer}
 
 
     const aiResponse = await askAi(messages)
-
-
-    const parsed = JSON.parse(aiResponse);
+    const cleanedJson = aiResponse.replace(/```json|```/g, "").trim();
+    const parsed = JSON.parse(cleanedJson);
 
     question.answer = answer;
     question.confidence = parsed.confidence;

@@ -13,12 +13,14 @@ const app = express()
 const allowedOrigins = [
   "http://localhost:5173",
   "https://ai-based-interview-f2sb-iota.vercel.app",
-];
+  process.env.CLIENT_URL
+].filter(Boolean);
+
 app.use(
   cors({
     origin: function (origin, callback) {
       if (!origin) return callback(null, true);
-      if (allowedOrigins.includes(origin)) {
+      if (allowedOrigins.includes(origin) || origin.endsWith(".vercel.app")) {
         callback(null, true);
       } else {
         callback(new Error("Not allowed by CORS"));
