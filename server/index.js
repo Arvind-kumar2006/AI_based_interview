@@ -10,10 +10,23 @@ import interviewRouter from "./routes/interview.route.js"
 import paymentRouter from "./routes/payment.route.js"
 
 const app = express()
-app.use(cors({
-    origin:"https://ai-based-interview-f2sb-iota.vercel.app",
-    credentials:true
-}))
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://ai-based-interview-f2sb-iota.vercel.app",
+];
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  })
+);
 
 app.use(express.json())
 app.use(cookieParser())
