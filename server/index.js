@@ -8,6 +8,7 @@ import authRouter from "./routes/auth.route.js"
 import userRouter from "./routes/user.route.js"
 import interviewRouter from "./routes/interview.route.js"
 import paymentRouter from "./routes/payment.route.js"
+import { getHealthReport } from "./services/health.service.js"
 
 const app = express()
 const allowedOrigins = [
@@ -39,8 +40,9 @@ app.use("/api/interview" , interviewRouter)
 app.use("/api/payment" , paymentRouter)
 
 
-app.get("/health"  , (req ,res)=>{
-  res.send("")
+app.get("/health"  , async (req ,res)=>{
+  const report = await getHealthReport()
+  res.status(report.status === "ok" ? 200 : 503).json(report)
 })
 const PORT = process.env.PORT || 6000
 app.listen(PORT , ()=>{
