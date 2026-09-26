@@ -35,8 +35,8 @@ app.use(cookieParser())
 
 app.use("/api/auth" , authRouter)
 app.use("/api/user", userRouter)
-app.use("/api/interview" , interviewRouter)
-app.use("/api/payment" , paymentRouter)
+app.use("/api/" , interviewRouter)
+app.use("/api/" , paymentRouter)
 
 
 app.get("/health"  , (req ,res)=>{
