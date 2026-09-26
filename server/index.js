@@ -44,6 +44,7 @@ app.use("/api/demo" , demoRouter)
 
 app.get("/health"  , async (req ,res)=>{
   try {
+    connectDb()
     res.send("okay")
   } catch (error) {
     console.log("done")
