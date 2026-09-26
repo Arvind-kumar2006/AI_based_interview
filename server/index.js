@@ -35,20 +35,15 @@ app.use(cookieParser())
 
 app.use("/api/auth" , authRouter)
 app.use("/api/user", userRouter)
-app.use("/api/" , interviewRouter)
-app.use("/api/" , paymentRouter)
+app.use("/api/interview" , interviewRouter)
+app.use("/api/payment" , paymentRouter)
 
 
 app.get("/health"  , (req ,res)=>{
-try {
-  connectDb()
-  res.send({message : "okay"})
-} catch (error) {
-  console.log(error)
-}
+  res.send("")
 })
 const PORT = process.env.PORT || 6000
 app.listen(PORT , ()=>{
     console.log(`Server running on port ${PORT}`)
-    
+    connectDb()
 })
