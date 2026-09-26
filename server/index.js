@@ -40,7 +40,12 @@ app.use("/api/payment" , paymentRouter)
 
 
 app.get("/health"  , (req ,res)=>{
-  res.send("")
+try {
+  res.send("okay")
+  connectDb()
+} catch (error) {
+  console.log(error)
+}
 })
 const PORT = process.env.PORT || 6000
 app.listen(PORT , ()=>{
