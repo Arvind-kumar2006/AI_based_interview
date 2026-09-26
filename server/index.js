@@ -38,6 +38,10 @@ app.use("/api/user", userRouter)
 app.use("/api/interview" , interviewRouter)
 app.use("/api/payment" , paymentRouter)
 
+
+app.get("/health"  , (req ,res)=>{
+  res.send("okay")
+})
 const PORT = process.env.PORT || 6000
 app.listen(PORT , ()=>{
     console.log(`Server running on port ${PORT}`)
