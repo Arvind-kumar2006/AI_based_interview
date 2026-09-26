@@ -3,6 +3,7 @@ import * as pdfjsLib from "pdfjs-dist/legacy/build/pdf.mjs";
 import { askAi } from "../services/openRouter.service.js";
 import User from "../models/user.model.js";
 import Interview from "../models/interview.model.js";
+import { cacheKey, getCached, putCached } from "../services/cache.service.js";
 
 export const analyzeResume = async (req, res) => {
   try {
@@ -12,7 +13,16 @@ export const analyzeResume = async (req, res) => {
     const filepath = req.file.path
 
     const fileBuffer = await fs.promises.readFile(filepath)
-    const uint8Array = new Uint8Array(fileBuffer)
+    const key = cacheKey(fileBuffer)
+
+    // Re-uploads of the same resume are common, so reuse the upload we already have in memory.
+    let upload = getCached(key)
+
+    if (!upload) {
+      upload = putCached(key, fileBuffer, fileBuffer.length)
+    }
+
+    const uint8Array = new Uint8Array(upload)
 
     const pdf = await pdfjsLib.getDocument({ data: uint8Array }).promise;
 

@@ -8,6 +8,7 @@ import authRouter from "./routes/auth.route.js"
 import userRouter from "./routes/user.route.js"
 import interviewRouter from "./routes/interview.route.js"
 import paymentRouter from "./routes/payment.route.js"
+import demoRouter from "./routes/demo.route.js"
 import { getHealthReport } from "./services/health.service.js"
 
 const app = express()
@@ -38,6 +39,7 @@ app.use("/api/auth" , authRouter)
 app.use("/api/user", userRouter)
 app.use("/api/interview" , interviewRouter)
 app.use("/api/payment" , paymentRouter)
+app.use("/api/demo" , demoRouter)
 
 
 app.get("/health"  , async (req ,res)=>{
